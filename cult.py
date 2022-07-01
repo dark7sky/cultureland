@@ -1,4 +1,3 @@
-from typing import KeysView
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import os
@@ -299,7 +298,7 @@ def envToVar(config_data: dict, target: str) -> dict:
         return False
 
 
-def env_timecheck(k: KeysView, target: str, org: datetime.time):
+def env_timecheck(k, target: str, org: datetime.time):
     TTT = org
     if target in k:
         try:
@@ -311,7 +310,7 @@ def env_timecheck(k: KeysView, target: str, org: datetime.time):
     return TTT
 
 
-def env_delaycheck(k: KeysView, target: str, org: int):
+def env_delaycheck(k, target: str, org: int):
     TTT = org
     if target in k:
         try:
