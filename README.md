@@ -11,4 +11,4 @@ https://hub.docker.com/repository/docker/dragom/cultureland
 ![recv_pinCode](https://github.com/dark7sky/cultureland/raw/main/flow_recv_pinCode.JPG)
 
 ### timechecker
-![timechecker](https://github.com/dark7sky/cultureland/raw/main/flow_timecheker.JPG)
+![timechecker](https://github.com/dark7sky/cultureland/raw/main/flow_timechecker.JPG)
