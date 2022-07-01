@@ -36,7 +36,7 @@ config_data = {
         "balance": "/html/body/div[4]/aside/div/div/section/div/div/dl[1]/dd[2]/p/span",
     },
 }
-active_count = 1000
+active_count = 120
 
 
 class simpleTelegram:
