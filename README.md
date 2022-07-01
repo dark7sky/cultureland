@@ -3,11 +3,12 @@
 
 https://hub.docker.com/repository/docker/dragom/cultureland
 
-## FLowchart - main
+## FLowchart
+### main
 ![main](https://github.com/dark7sky/cultureland/raw/main/flow_main.JPG)
 
-## FLowchart - recv_pinCode
-![main](https://github.com/dark7sky/cultureland/raw/main/flow_pinCode.JPG)
+### recv_pinCode
+![recv_pinCode](https://github.com/dark7sky/cultureland/raw/main/flow_pinCode.JPG)
 
-## FLowchart - timechecker
-![main](https://github.com/dark7sky/cultureland/raw/main/flow_timecheker.JPG)
+### timechecker
+![timechecker](https://github.com/dark7sky/cultureland/raw/main/flow_timecheker.JPG)
