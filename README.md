@@ -8,7 +8,7 @@ https://hub.docker.com/repository/docker/dragom/cultureland
 ![main](https://github.com/dark7sky/cultureland/raw/main/flow_main.JPG)
 
 ### recv_pinCode
-![recv_pinCode](https://github.com/dark7sky/cultureland/raw/main/flow_pinCode.JPG)
+![recv_pinCode](https://github.com/dark7sky/cultureland/raw/main/flow_recv_pinCode.JPG)
 
 ### timechecker
 ![timechecker](https://github.com/dark7sky/cultureland/raw/main/flow_timecheker.JPG)
