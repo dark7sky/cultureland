@@ -342,9 +342,9 @@ if __name__ == "__main__":
                 problem = True
     ### If there is env ###
     envkeys = os.environ.keys()
-    opening = env_timecheck(envkeys, "opening", datetime.time(8, 59, 0, 0))
-    closing = env_timecheck(envkeys, "closing", datetime.time(22, 30, 0, 0))
-    hotclosing = env_timecheck(envkeys, "hotclosing", datetime.time(16, 30, 0, 0))
+    opening = env_timecheck(envkeys, "opening", datetime.time(8, 0, 0, 0))
+    closing = env_timecheck(envkeys, "closing", datetime.time(16, 30, 0, 0))
+    hotclosing = env_timecheck(envkeys, "hotclosing", datetime.time(11, 30, 0, 0))
     delay_nor = env_delaycheck(envkeys, "delay_nor", 60)
     delay_hot = env_delaycheck(envkeys, "delay_hot", 10)
     delay_off = env_delaycheck(envkeys, "delay_off", 10 * 60)

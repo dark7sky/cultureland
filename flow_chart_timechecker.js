@@ -5,7 +5,6 @@ cond89=>condition: if opening <= current time <= hotclosing
 op93=>operation: sleep delay_hot
 cond104=>condition: if hotclosing <= current time <= closing
 op108=>operation: sleep delay_nor
-
 op123=>operation: sleep delay_off
 e134=>end: end timechecker
 st29->cond35
