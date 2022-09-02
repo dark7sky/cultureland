@@ -27,12 +27,12 @@ config_data = {
         "PIN3": '//*[@id="txtScr13"]',
         "PIN4": '//*[@id="txtScr14"]',
         "PIN_done": '//*[@id="mtk_done"]',
-        "Charge": '//*[@id="btnCshFrom"]',
+        "Charge": '//a[@id="btnCshFrom"]',
         "inputCode": '//*[@id="wrap"]/div[1]/section/div/table/tbody/tr/td[2]',
         "amount": '//*[@id="wrap"]/div[1]/section/dl[1]/dd',
         "result": '//*[@id="wrap"]/div[1]/section/div/table/tbody/tr/td[3]',
         "menu": "/html/body/header/div/a[2]",
-        "balance": "/html/body/div[4]/aside/div/div/section/div/div/dl[1]/dd[2]/p/span",
+        "balance": "//*[@id='blnAmt']",
     },
 }
 active_count = 120
@@ -223,8 +223,9 @@ def chargePinCode(config_data: dict, pinCode: tuple, webdrv: webdriver.Chrome) -
         )
         time.sleep(0.1)
         inputVirtualKeypad(pinCode[3], config_data["xpaths"]["KEYPAD"], webdrv)
-        webdrv.find_element(By.XPATH, config_data["xpaths"]["PIN_done"]).click()
-        time.sleep(0.1)
+        # time.sleep(0.1)
+        # webdrv.find_element(By.XPATH, config_data["xpaths"]["PIN_done"]).click()
+        time.sleep(1)
         webdrv.find_element(By.XPATH, config_data["xpaths"]["Charge"]).click()
         time.sleep(0.1)
         return True
