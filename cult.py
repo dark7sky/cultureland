@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import datetime
 
-## python -m PyInstaller -F Check_currency.py --collect-data selenium --collect-data certifi
+# python -m PyInstaller -F Check_currency.py --collect-data selenium --collect-data certifi
 config_data = {
     "login_url": "https://m.cultureland.co.kr/csh/cshGiftCard.do",
     "pic_capcha": "capcha.png",
@@ -53,7 +53,8 @@ class simpleTelegram:
 
     def sendPhoto(self, imgPth: str) -> str:
         try:
-            req = self.bot.send_photo(chat_id=self.userid, photo=open(imgPth, "rb"))
+            req = self.bot.send_photo(
+                chat_id=self.userid, photo=open(imgPth, "rb"))
         except Exception as e:
             req = self.sendMsg(msg=f"Error while sending photo: {e}")
         return req["message_id"]
@@ -84,7 +85,8 @@ def recv_pinCode(Tbot: simpleTelegram, times: dict) -> tuple:
     abort = False
     while not abort:
         try:
-            recvData = requests.get(Tbot.telegram_req).json()["result"][-1]["message"]
+            recvData = requests.get(Tbot.telegram_req).json()[
+                "result"][-1]["message"]
         except:
             recvData = {"date": "0"}
         try:
@@ -117,11 +119,13 @@ def recv_pinCode(Tbot: simpleTelegram, times: dict) -> tuple:
 
 
 def send_capcha(Tbot: simpleTelegram, img: str) -> str:
-    prevDate = requests.get(Tbot.telegram_req).json()["result"][-1]["message"]["date"]
+    prevDate = requests.get(Tbot.telegram_req).json()[
+        "result"][-1]["message"]["date"]
     last_capcha = Tbot.sendPhoto(imgPth=img)
     abort = False
     while not abort:
-        recvData = requests.get(Tbot.telegram_req).json()["result"][-1]["message"]
+        recvData = requests.get(Tbot.telegram_req).json()[
+            "result"][-1]["message"]
         if (not recvData["date"] == prevDate) and (len(recvData["text"]) == 5):
             abort = True
         else:
@@ -179,7 +183,8 @@ def cultureland_doLogin(
     webdrv.save_screenshot(config_data["pic_capcha"])
     capchar = send_capcha(Tbot, config_data["pic_capcha"])
     print(f"Received capchar key: {capchar}")
-    webdrv.find_element(By.XPATH, config_data["xpaths"]["capcha"]).send_keys(capchar)
+    webdrv.find_element(
+        By.XPATH, config_data["xpaths"]["capcha"]).send_keys(capchar)
     time.sleep(0.1)
     webdrv.find_element(By.XPATH, config_data["xpaths"]["ID"]).send_keys(
         config_data["ID"]
@@ -187,12 +192,14 @@ def cultureland_doLogin(
     time.sleep(0.1)
     webdrv.find_element(By.XPATH, config_data["xpaths"]["PSSWD"]).click()
     time.sleep(0.1)
-    inputVirtualKeypad(config_data["PSSWD"], config_data["xpaths"]["KEYPAD"], webdrv)
+    inputVirtualKeypad(config_data["PSSWD"],
+                       config_data["xpaths"]["KEYPAD"], webdrv)
     webdrv.find_element(By.XPATH, config_data["xpaths"]["KEYPAD_done"]).click()
     time.sleep(0.1)
     webdrv.find_element(By.XPATH, config_data["xpaths"]["checkBox_ID"]).click()
     time.sleep(0.1)
-    webdrv.find_element(By.XPATH, config_data["xpaths"]["checkBox_Stay"]).click()
+    webdrv.find_element(
+        By.XPATH, config_data["xpaths"]["checkBox_Stay"]).click()
     time.sleep(0.1)
     webdrv.find_element(By.XPATH, config_data["xpaths"]["LOGIN"]).click()
 
@@ -209,6 +216,11 @@ def inputVirtualKeypad(word: str, xpaths: str, webdrv: webdriver.Chrome):
 
 
 def chargePinCode(config_data: dict, pinCode: tuple, webdrv: webdriver.Chrome) -> bool:
+    try:
+        webdrv.execute_script("javascript:closeLayersNoPop()")
+        print("Close pop-up")
+    except:
+        print("No pop-up")
     try:
         webdrv.find_element(By.XPATH, config_data["xpaths"]["PIN1"]).send_keys(
             pinCode[0]
@@ -245,13 +257,13 @@ def main(config_data: dict, times: dict):
     while True:
         pinCode, msg_id = recv_pinCode(Tbot=Tbot, times=times)
         if webdrv == None:
-            webdrv = set_chrome_driver(True)
+            webdrv = set_chrome_driver(False)
             if webdrv == False:
                 Tbot.sendMsg(msg="Chrome did not prepared")
                 return False
         webdrv.get(config_data["login_url"])
         cookies.load_cookies(webdrv, "cookie.pickle", None, False)
-        ### Login Check
+        # Login Check
         trial_count = 0
         while not cultureland_checkLoginStatus(config_data, webdrv):
             trial_count += 1
@@ -264,15 +276,20 @@ def main(config_data: dict, times: dict):
         if not req:
             Tbot.sendMsg(msg="Charing the pincode has an error")
         else:
-            ###check result
+            # check result
             result = [
-                webdrv.find_element(By.XPATH, config_data["xpaths"]["inputCode"]).text,
-                webdrv.find_element(By.XPATH, config_data["xpaths"]["amount"]).text,
-                webdrv.find_element(By.XPATH, config_data["xpaths"]["result"]).text,
+                webdrv.find_element(
+                    By.XPATH, config_data["xpaths"]["inputCode"]).text,
+                webdrv.find_element(
+                    By.XPATH, config_data["xpaths"]["amount"]).text,
+                webdrv.find_element(
+                    By.XPATH, config_data["xpaths"]["result"]).text,
             ]
-            webdrv.find_element(By.XPATH, config_data["xpaths"]["menu"]).click()
+            webdrv.find_element(
+                By.XPATH, config_data["xpaths"]["menu"]).click()
             result.append(
-                webdrv.find_element(By.XPATH, config_data["xpaths"]["balance"]).text
+                webdrv.find_element(
+                    By.XPATH, config_data["xpaths"]["balance"]).text
             )
             print(result)
             if result[2] == "충전 완료":
@@ -345,7 +362,8 @@ if __name__ == "__main__":
     envkeys = os.environ.keys()
     opening = env_timecheck(envkeys, "opening", datetime.time(8, 0, 0, 0))
     closing = env_timecheck(envkeys, "closing", datetime.time(16, 30, 0, 0))
-    hotclosing = env_timecheck(envkeys, "hotclosing", datetime.time(11, 30, 0, 0))
+    hotclosing = env_timecheck(
+        envkeys, "hotclosing", datetime.time(11, 30, 0, 0))
     delay_nor = env_delaycheck(envkeys, "delay_nor", 60)
     delay_hot = env_delaycheck(envkeys, "delay_hot", 10)
     delay_off = env_delaycheck(envkeys, "delay_off", 10 * 60)
